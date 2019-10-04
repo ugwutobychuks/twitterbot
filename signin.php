@@ -1,3 +1,27 @@
+<?php
+	require('db.php');
+	session_start();
+    // If form submitted, insert values into the database.
+    if (isset($_POST['username'])){
+		
+		$username = stripslashes($_REQUEST['username']); // removes backslashes
+		$username = mysqli_real_escape_string($con,$username); //escapes special characters in a string
+		$password = stripslashes($_REQUEST['password']);
+		$password = mysqli_real_escape_string($con,$password);
+		
+	//Checking is user existing in the database or not
+        $query = "SELECT * FROM `twitusers` WHERE username='$username' and password='".md5($password)."'";
+		$result = mysqli_query($con,$query) or die(mysql_error());
+		$rows = mysqli_num_rows($result);
+        if($rows==1){
+			$_SESSION['username'] = $username;
+			header("Location: dashboard.php"); // Redirect user to index.php
+            }else{
+				echo "<div class='form'><h3>Email/Password is incorrect.</h3><br/>Click here to <a href='login.php'>Login</a></div>";
+				}
+    }else{
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,7 +29,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge, chrome=1" />
     <meta name="HandheldFriendly" content="true" />
-    <title>Nemesis Twitter Bot Sign Up Page</title>
+    <title>Nemesis Twitter Bot Login Page</title>
 
     <link
       rel="stylesheet"
@@ -47,30 +71,16 @@
           </div>
         </div>
         <div class="col-sm-6 second_column">
-          <!-- <a href="signin.html"><button class="loginrdr">Login</button></a> -->
-          <form method="post" action="">
+          <form method="post">
             <div class="form-group">
-              <h3>Create an account</h3>
-
-              <label for="exampleinputusername">Username</label>
+              <h3>Welcome</h3>
+              <label for="exampleInputEmail1">Username</label>
               <input
-                name="name"
+                name="username"
                 type="text"
-                class="form-control input-box"
-                id="exampleinputusername"
-                aria-describedby="textHelp"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="exampleinputemail">Email</label>
-              <input
-                name="email"
-                type="email"
                 class="form-control"
-                id="exampleinputemail"
+                id="exampleInputEmail1"
                 aria-describedby="textHelp"
-                required
               />
             </div>
             <div class="form-group">
@@ -80,36 +90,23 @@
                 type="password"
                 class="form-control"
                 id="exampleInputPassword1"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="examplerepeatpassword">Repeat password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="examplerepeatpassword"
-                required
               />
             </div>
             <button type="submit" class="btn btn-primary btn-block">
-              <a href="signin.html">Signup</a>
+              <a href="dashboard.html">Login</a>
             </button>
-            <button type="submit" class="btn btn-primary btn-block">
-              <a href="https://www.twitter.com"
-                >Signup with your twitter account</a
-              >
-            </button>
+
             <span>
-              <p>Already have an account?</p>
+              <p>Don't have an account yet?</p>
               <button id="button" class="btn btn-primary btn-block">
-                <a href="signin.html">Login</a>
+                <a  href="signup.html">Signup</a>
               </button></span
             >
+          <a style="color: #007bff !important" href="forgot-password.html">forgot password?</a>
+            </div>
           </form>
-        </div>
       </div>
     </div>
+        <?php } ?>
   </body>
-
 </html>

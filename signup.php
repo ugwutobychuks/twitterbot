@@ -1,3 +1,28 @@
+<?php
+
+
+	require('db.php');
+    // If form submitted, insert values into the database.
+    if (isset($_REQUEST['email'])){
+		$email = stripslashes($_REQUEST['email']); // removes backslashes
+		$email = mysqli_real_escape_string($con,$email); //escapes special characters in a string
+		$username = stripslashes($_REQUEST['username']);
+		$username = mysqli_real_escape_string($con,$username);
+		$password = stripslashes($_REQUEST['password']);
+		$password = mysqli_real_escape_string($con,$password);
+
+
+		$trn_date = date("Y-m-d H:i:s");
+        $query = "INSERT into `twitusers` ( email,username, password, trn_date) VALUES ('$email','$username',  '".md5($password)."',  '$trn_date')";
+        $result = mysqli_query($con,$query);
+        if($result){
+            echo "<div class='form-group' ><h3>You are registered successfully.</h3><br/>Click here to <a href='signin.php'>Login</a></div>";
+        }
+    }else{
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,7 +30,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge, chrome=1" />
     <meta name="HandheldFriendly" content="true" />
-    <title>Nemesis Twitter Bot Login Page</title>
+    <title>Nemesis Twitter Bot Sign Up Page</title>
 
     <link
       rel="stylesheet"
@@ -47,39 +72,70 @@
           </div>
         </div>
         <div class="col-sm-6 second_column">
-          <form method="post">
+          <!-- <a href="signin.html"><button class="loginrdr">Login</button></a> -->
+          <form method="post" action="">
             <div class="form-group">
-              <h3>Welcome</h3>
-              <label for="exampleInputEmail1">Username</label>
+              <h3>Create an account</h3>
+
+              <label for="exampleinputusername">Username</label>
               <input
+                name="username"
                 type="text"
-                class="form-control"
-                id="exampleInputEmail1"
+                class="form-control input-box"
+                id="exampleinputusername"
                 aria-describedby="textHelp"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleinputemail">Email</label>
+              <input
+                name="email"
+                type="email"
+                class="form-control"
+                id="exampleinputemail"
+                aria-describedby="textHelp"
+                required
               />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
               <input
+                name="password"
                 type="password"
                 class="form-control"
                 id="exampleInputPassword1"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="examplerepeatpassword">Repeat password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="examplerepeatpassword"
+                required
               />
             </div>
             <button type="submit" class="btn btn-primary btn-block">
-              <a href="dashboard.html">Login</a>
+              <a href="signin.html">Signup</a>
             </button>
-
+            <button type="submit" class="btn btn-primary btn-block">
+              <a href="https://www.twitter.com"
+                >Signup with your twitter account</a
+              >
+            </button>
             <span>
-              <p>Don't have an account yet?</p>
+              <p>Already have an account?</p>
               <button id="button" class="btn btn-primary btn-block">
-                <a  href="signup.html">Signup</a>
+                <a href="signin.html">Login</a>
               </button></span
             >
-          <a style="color: #007bff !important" href="forgot-password.html">forgot password?</a>
-            </div>
           </form>
+        </div>
       </div>
     </div>
+    <?php } ?>
   </body>
+
 </html>
