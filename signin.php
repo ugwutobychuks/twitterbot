@@ -93,16 +93,16 @@
               />
             </div>
             <button type="submit" class="btn btn-primary btn-block">
-              <a href="dashboard.html">Login</a>
+              <a href="dashboard.php">Login</a>
             </button>
 
             <span>
               <p>Don't have an account yet?</p>
               <button id="button" class="btn btn-primary btn-block">
-                <a  href="signup.html">Signup</a>
+                <a  href="signup.php">Signup</a>
               </button></span
             >
-          <a style="color: #007bff !important" href="forgot-password.html">forgot password?</a>
+          <a style="color: #007bff !important" href="forgot-password.php">forgot password?</a>
             </div>
           </form>
       </div>

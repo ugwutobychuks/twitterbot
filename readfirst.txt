@@ -1,0 +1,33 @@
+create a database named twitbot
+creaate a user: 
+username: twituser 
+password: password
+
+create a table:
+
+CREATE TABLE `password_reset_temp` (
+  `email` varchar(250) NOT NULL,
+  `key` varchar(250) NOT NULL,
+  `expDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+create another table:
+
+CREATE TABLE `twitusers` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `username` varchar(250) NOT NULL,
+  `email` varchar(250) NOT NULL,
+  `password` varchar(250) NOT NULL,
+  `trn_date` datetime NOT NULL,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+//mail server settings in forgot-password.php
+//setup mail client in cpanel and use the credentials
+
+$fromserver = "noreply@yourwebsite.com"; 
+$mail->Host = "mail.tobychuks.com.ng"; // Enter your host here
+$mail->Username = "twitterbot@tobychuks.com.ng"; // Enter your email here
+$mail->Password = "@Password@1."; //Enter your passwrod here
+$mail->Port = 26;
+$mail->From = "twitterbot@tobychuks.com.ng";

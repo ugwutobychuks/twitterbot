@@ -18,7 +18,7 @@
   </head>
   <body>
     <div class="container">
-      <a stylehref="logout.php">Logout</a>
+      <h4 style="text-align:right;"> <a href="logout.php">Logout</a></h4>
       <div class="row">
         <div class="col-sm-4 ">
           <p>Team Nemesis</p>

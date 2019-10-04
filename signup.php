@@ -16,7 +16,7 @@
         $query = "INSERT into `twitusers` ( email,username, password, trn_date) VALUES ('$email','$username',  '".md5($password)."',  '$trn_date')";
         $result = mysqli_query($con,$query);
         if($result){
-            echo "<div class='form-group' ><h3>You are registered successfully.</h3><br/>Click here to <a href='signin.php'>Login</a></div>";
+            echo "<div class='form-group'><h3>You are registered successfully.</h3><br/>Click here to <a href='signin.php'>Login</a></div>";
         }
     }else{
 ?>
@@ -118,7 +118,7 @@
               />
             </div>
             <button type="submit" class="btn btn-primary btn-block">
-              <a href="signin.html">Signup</a>
+              <a href="signup.php">Signup</a>
             </button>
             <button type="submit" class="btn btn-primary btn-block">
               <a href="https://www.twitter.com"
@@ -128,7 +128,7 @@
             <span>
               <p>Already have an account?</p>
               <button id="button" class="btn btn-primary btn-block">
-                <a href="signin.html">Login</a>
+                <a href="signin.php">Login</a>
               </button></span
             >
           </form>
